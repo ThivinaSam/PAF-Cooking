@@ -1,0 +1,208 @@
+.update-profile-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 2rem;
+}
+
+.update-profile-content {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.update-profile-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.update-profile-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.update-profile-header h1 {
+    font-size: 2.5rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.update-profile-header p {
+    color: #718096;
+}
+
+.profile-upload-section {
+    margin: 2rem auto;
+    width: 150px;
+}
+
+.profile-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px dashed #cbd5e1;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.profile-preview:hover {
+    border-color: #667eea;
+}
+
+.preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+}
+
+.upload-icon {
+    font-size: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.floating-label {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0 0.5rem;
+    color: #64748b;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.form-input:focus,
+.form-input:not(:placeholder-shown) {
+    border-color: #667eea;
+    outline: none;
+}
+
+.form-input:focus ~ .floating-label,
+.form-input:not(:placeholder-shown) ~ .floating-label {
+    transform: translateY(-1.4rem) scale(0.85);
+    background: white;
+    color: #667eea;
+}
+
+.skills-section {
+    margin: 2rem 0;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.skill-tag {
+    background: #667eea;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.remove-skill {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.skill-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.add-skill-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 48px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.update-button, .cancel-button {
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.update-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    flex: 2;
+}
+
+.cancel-button {
+    background: white;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+    flex: 1;
+}
+
+.button-icon {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.update-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
