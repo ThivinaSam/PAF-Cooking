@@ -56,7 +56,7 @@
 
 .view-toggle.active {
   background: #667eea;
-  color: white;
+  color: red;
 }
 
 .filter-tags {
