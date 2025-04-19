@@ -32,6 +32,11 @@ public class AchievementsController {
     @PostMapping("/achievements/upload")
     public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
+            // Create directory if it doesn't exist
+            if (!Files.exists(this.root)) {
+                Files.createDirectories(this.root);
+            }
+
             String extension = file.getOriginalFilename()
                     .substring(file.getOriginalFilename().lastIndexOf("."));
             String filename = UUID.randomUUID() + extension;
