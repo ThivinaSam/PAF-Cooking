@@ -119,28 +119,60 @@ function AddAchievements() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    let imageUrl = '';
-    if (image) {
-      const formData = new FormData();
-      formData.append('file', image);
-      const uploadResponse = await fetch('http://localhost:8080/achievements/upload', {
+    
+    try {
+      let imageUrl = '';
+      if (image) {
+        // Create a FormData specifically for the image upload
+        const imageFormData = new FormData();
+        imageFormData.append('file', image);
+        
+        try {
+          const uploadResponse = await fetch('http://localhost:8080/achievements/upload', {
+            method: 'POST',
+            body: imageFormData,
+          });
+          
+          if (!uploadResponse.ok) {
+            throw new Error(`Upload failed with status: ${uploadResponse.status}`);
+          }
+          
+          imageUrl = await uploadResponse.text();
+        } catch (uploadError) {
+          console.error('Image upload error:', uploadError);
+          alert(`Image upload failed: ${uploadError.message}`);
+          setIsSubmitting(false);
+          return;
+        }
+      }
+  
+      // Create the achievement with the image URL
+      const achievementData = {
+        ...formData,
+        imageUrl: imageUrl
+      };
+  
+      // Send the achievement data to create a new achievement
+      const achievementResponse = await fetch('http://localhost:8080/achievements', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(achievementData),
       });
-      imageUrl = await uploadResponse.text();
-    }
-
-    const response = await fetch('http://localhost:8080/achievements', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...formData, imageUrl }),
-    });
-    setIsSubmitting(false);
-    if (response.ok) {
-      alert('Achievements added successfully!');
+  
+      if (!achievementResponse.ok) {
+        const errorText = await achievementResponse.text();
+        throw new Error(`Failed to create achievement: ${errorText}`);
+      }
+      
+      alert('Achievement added successfully!');
       window.location.href = '/myAchievements';
-    } else {
-      alert('Failed to add Achievements.');
+    } catch (error) {
+      console.error('Submit error:', error);
+      alert(`Failed to add Achievement: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
