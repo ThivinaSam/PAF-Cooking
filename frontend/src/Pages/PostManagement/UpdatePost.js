@@ -78,7 +78,7 @@ function UpdatePost() {
   const handleNewMediaChange = async (e) => {
     const files = Array.from(e.target.files);
     const maxFileSize = 50 * 1024 * 1024; // 50MB
-    const maxImageCount = 3;
+    const maxImageCount = 2;
 
     let imageCount = existingMedia.filter((url) => !url.endsWith('.mp4')).length;
     let videoCount = existingMedia.filter((url) => url.endsWith('.mp4')).length;
