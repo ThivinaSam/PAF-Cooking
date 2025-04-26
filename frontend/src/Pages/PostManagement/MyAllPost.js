@@ -172,7 +172,7 @@ function MyAllPost() {
   const handleAddComment = async (postId) => {
     const userID = localStorage.getItem('userID');
     if (!userID) {
-      alert('Please log in to comment.');
+      alert('Login first before comment.');
       return;
     }
     const content = newComment[postId] || ''; // Get the comment content for the specific post
