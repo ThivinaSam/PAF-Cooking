@@ -151,7 +151,7 @@ function MyAllPost() {
   const handleFollowToggle = async (postOwnerID) => {
     const userID = localStorage.getItem('userID');
     if (!userID) {
-      alert('Please log in to follow/unfollow users.');
+      alert('Please log in to follow or unfollow users.');
       return;
     }
     try {
