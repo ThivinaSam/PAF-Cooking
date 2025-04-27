@@ -87,10 +87,10 @@ function NavBar() {
                             Learning Plan
                         </p>
                         <p
-                            className={`nav_nav_item ${currentPath === '/allAchievements' ? 'nav_nav_item_active' : ''}`}
-                            onClick={() => (window.location.href = '/allAchievements')}
+                            className={`nav_nav_item ${currentPath === '/allLearningProgress' ? 'nav_nav_item_active' : ''}`}
+                            onClick={() => (window.location.href = '/allLearningProgress')}
                         >
-                            Achievements
+                            Learning Progress
                         </p>
                         {allRead ? (
                             <MdNotifications
