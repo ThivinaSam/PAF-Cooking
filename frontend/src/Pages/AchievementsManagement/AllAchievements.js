@@ -158,7 +158,7 @@ function AllAchievements() {
                   className="empty-content"
                 >
                   <FaTrophy className="empty-icon" />
-                  <h3>Start Your Achievement Journey</h3>
+                  <h3>Start Your Learning Progress Journey</h3>
                   <p>Create your first milestone and track your progress</p>
                   <motion.button
                     className="first-achievement-btn"
