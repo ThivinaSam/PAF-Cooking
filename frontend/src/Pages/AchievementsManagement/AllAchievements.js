@@ -78,7 +78,7 @@ function AllAchievements() {
               <FaTrophy className="stat-icon trophy" />
               <div className="stat-details">
                 <span className="stat-value">{filteredData.length}</span>
-                <span className="stat-label">Total Achievements</span>
+                <span className="stat-label">Total Learning Progress</span>
               </div>
             </div>
             <div className="stat-item">
