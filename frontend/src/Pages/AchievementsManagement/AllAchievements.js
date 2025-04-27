@@ -68,7 +68,7 @@ function AllAchievements() {
         <div className="achievements-header">
           <div className="header-top">
             <div className="header-title">
-              <h1>Achievement Collection</h1>
+              <h1>Learning Progress</h1>
               <p className="subtitle">Track your journey of success</p>
             </div>
           </div>
