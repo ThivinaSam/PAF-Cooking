@@ -251,7 +251,7 @@ function AllAchievements() {
                               onClick={() => window.location.href = `/updateAchievements/${progress.id}`}
                             >
                               <MdEdit className="btn-icon" />
-                              <span className="btn-text">Edit</span>
+                              <span className="btn-text">Update</span>
                             </motion.button>
                             <motion.button
                               className="action-btn delete-btn"
