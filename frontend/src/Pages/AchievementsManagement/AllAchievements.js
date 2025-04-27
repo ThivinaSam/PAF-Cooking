@@ -170,7 +170,7 @@ function AllAchievements() {
                     onClick={() => window.location.href = '/addAchievements'}
                   >
                     <IoIosCreate className="btn-icon" />
-                    <span>Add First Achievement</span>
+                    <span>Add First Learning Progress</span>
                     <div className="btn-shine"></div>
                   </motion.button>
                 </motion.div>
