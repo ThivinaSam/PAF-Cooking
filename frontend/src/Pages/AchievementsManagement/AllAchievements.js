@@ -142,7 +142,7 @@ function AllAchievements() {
         >
           <div className="button-inner">
             <IoIosCreate className="add-icon" />
-            <span className="button-text">Add Achievement</span>
+            <span className="button-text">Add Learning Progress</span>
           </div>
           <div className="button-glow" />
         </motion.button>
