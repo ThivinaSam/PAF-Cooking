@@ -39,11 +39,11 @@
 .form-group select {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #e2e859;
   border-radius: 12px;
   background: transparent;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 3rem;
+  transition: all 0.1s ease;
 }
 
 .form-group label {
