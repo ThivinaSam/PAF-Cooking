@@ -185,7 +185,7 @@ function AddAchievements() {
         animate={{ opacity: 1, y: 0 }}
       >
         <div className="form-header">
-          <h1>Add New Achievement</h1>
+          <h1>Add New Learning Progress</h1>
           <p>Share your milestone with the community</p>
           <div className="progress-steps">
             {[1, 2, 3].map((step) => (
