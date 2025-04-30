@@ -350,7 +350,7 @@ function AddAchievements() {
               {isSubmitting ? (
                 <div className="loading">Submitting...</div>
               ) : (
-                <>Add Achievement</>
+                <>Add Learning Progress</>
               )}
             </motion.button>
           </div>
