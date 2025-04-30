@@ -134,7 +134,7 @@ function MyAchievements() {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => window.location.href = '/addAchievements'}
                 >
-                  Add First Achievement
+                  Add First Learning Progress
                 </motion.button>
               </motion.div>
             ) : (
