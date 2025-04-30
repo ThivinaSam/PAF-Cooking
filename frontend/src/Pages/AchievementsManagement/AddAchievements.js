@@ -334,7 +334,7 @@ function AddAchievements() {
                   onChange={handleChange}
                   required
                 />
-                <label>Achievement Date</label>
+                <label>Learning Progress Date</label>
               </div>
             </div>
           </div>
