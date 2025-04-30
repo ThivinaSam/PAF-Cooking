@@ -270,7 +270,7 @@ function AddAchievements() {
                   required
                   placeholder=" "
                 />
-                <label>Achievement Title</label>
+                <label>Learning progress Title</label>
               </div>
 
               <div className="floating-input category-dropdown" ref={dropdownRef}>
