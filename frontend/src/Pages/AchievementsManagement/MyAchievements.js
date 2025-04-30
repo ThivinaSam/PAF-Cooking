@@ -110,7 +110,7 @@ function MyAchievements() {
               onClick={() => window.location.href = '/addAchievements'}
             >
               <IoAdd />
-              <span>New Achievement</span>
+              <span>New Learning Progress</span>
             </motion.button>
           </div>
         </div>
