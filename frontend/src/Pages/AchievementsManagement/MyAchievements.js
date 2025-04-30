@@ -127,7 +127,7 @@ function MyAchievements() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <FaTrophy className="empty-icon" />
-                <h3>No Achievements Yet</h3>
+                <h3>No Learning Progress Yet</h3>
                 <p>Start documenting your journey</p>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
