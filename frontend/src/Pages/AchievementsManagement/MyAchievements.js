@@ -66,7 +66,7 @@ function MyAchievements() {
       <div className="dashboard-content">
         <div className="dashboard-header">
           <div className="header-title">
-            <h1>My Achievements</h1>
+            <h1>My Learning Progress</h1>
             <p>Track your progress and celebrate milestones</p>
           </div>
 
@@ -75,7 +75,7 @@ function MyAchievements() {
               <FaTrophy className="stat-icon trophy" />
               <div className="stat-info">
                 <span className="stat-value">{stats.total}</span>
-                <span className="stat-label">Total Achievements</span>
+                <span className="stat-label">Total Learning Progress</span>
               </div>
             </div>
             <div className="stat-card">
