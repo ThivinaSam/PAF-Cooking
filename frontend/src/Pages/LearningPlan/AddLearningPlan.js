@@ -285,7 +285,7 @@ function AddLearningPlan() {
             <div className="section-title">
               <h2>Create Your Learning Plan</h2>
               <p>Fill in the details of your learning journey</p>
-              <p>Fill in the details of your learning journey</p>
+              
             </div>
             <form onSubmit={handleSubmit} className="modern-form">
               <div className="form-row">
