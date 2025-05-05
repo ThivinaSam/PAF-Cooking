@@ -385,18 +385,6 @@
   display: block;
 }
 
-.submit-button {
-  background: #4299e1;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 501;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-}
 
 .submit-button:hover {
   background: #3182ce;
