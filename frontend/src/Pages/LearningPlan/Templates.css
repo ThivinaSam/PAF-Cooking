@@ -413,6 +413,15 @@
   gap: 0.5rem;
 }
 
+.file-upload-container {
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #f7fafc;
+  border: 2px dashed #e2e8f0;
+  position: relative;
+  min-height: 200px;
+}
 
 .upload-placeholder {
   padding: 2rem;
