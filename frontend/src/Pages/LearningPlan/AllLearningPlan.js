@@ -332,7 +332,7 @@ function AllLearningPlan() {
 
         <motion.button
           className="floating-add-btn"
-          whileHover={{ scale: 1.1, rotate: 280 }}
+          whileHover={{ scale: 1.1, rotate: 180 }}
           whileTap={{ scale: 0. }}
           onClick={() => window.location.href = '/addLearningPlan'}
         >
