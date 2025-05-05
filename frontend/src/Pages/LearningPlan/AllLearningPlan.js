@@ -143,7 +143,7 @@ function AllLearningPlan() {
                 </div>
               )}
             </div>
-            <p className='template_title'>{post.title}</p>
+            
             <p className='template_dates'><HiCalendarDateRange /> {post.startDate} to {post.endDate} </p>
             <p className='template_description'>{post.category}</p>
             <hr></hr>
