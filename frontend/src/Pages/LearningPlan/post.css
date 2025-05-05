@@ -81,7 +81,7 @@
 }
 .post_card {
   width: 670px;
-  border: 5px solid #004c5d;
+  border: 1px solid #004c5d;
   border-radius: 5px;
   justify-content: center;
   padding: 15px;
@@ -124,7 +124,7 @@
   transition: background 0.2s ease;
 }
 .not_found_btn:hover {
-  background: #2563eb;
+  background: #490033;
 }
 .not_found_msg {
   color: #676565;
