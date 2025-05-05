@@ -310,10 +310,10 @@ function AddLearningPlan() {
                     required
                   >
                     <option value="">Select...</option>
-                    <option value="Tech">Tech</option>
-                    <option value="Programming">Programming</option>
-                    <option value="Cooking">Cooking</option>
-                    <option value="Photography">Photography</option>
+                    <option value="Drinks">Drinks</option>
+                    <option value="Bakery">Bakery</option>
+                    <option value="cake">Cake</option>
+                    <option value="lunch">Lunch</option>
                   </select>
                   <label className="floating-label">Learning Category *</label>
                 </div>
