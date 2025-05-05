@@ -298,14 +298,7 @@ function MyLearningPlan() {
                   <div className="empty-icon">📚</div>
                   <h2>No Learning Plans Found</h2>
                   <p>Start your learning journey by creating a new plan</p>
-                  <motion.button
-                    className="create-button"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => window.location.href = '/addLearningPlan'}
-                  >
-                    Create New Plan
-                  </motion.button>
+                 
                 </div>
               </motion.div>
             ) : (
