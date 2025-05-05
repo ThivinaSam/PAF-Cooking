@@ -3,11 +3,28 @@ import axios from 'axios';
 import NavBar from '../../Components/NavBar/NavBar';
 function AddNewPost() {
   const [title, setTitle] = useState('');
+  const [titleError, setTitleError] = useState(''); // Add this new state
   const [description, setDescription] = useState('');
   const [media, setMedia] = useState([]);
   const [mediaPreviews, setMediaPreviews] = useState([]); // For storing media preview objects
   const [categories, setCategories] = useState(''); // New state for categories
   const userID = localStorage.getItem('userID');
+
+  const validateTitle = (value) => {
+    // Check for alphanumeric characters only
+    const alphanumericRegex = /^[a-zA-Z0-9\s]*$/;
+    
+    if (value.length > 25) {
+      setTitleError('Title must not exceed 25 characters');
+      return false;
+    } else if (!alphanumericRegex.test(value)) {
+      setTitleError('Title can only contain letters and numbers');
+      return false;
+    } else {
+      setTitleError('');
+      return true;
+    }
+  };
 
   const handleMediaChange = (e) => {
     const files = Array.from(e.target.files);
@@ -65,6 +82,12 @@ function AddNewPost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate title before submission
+    if (!validateTitle(title)) {
+      return;
+    }
+    
     const formData = new FormData();
     formData.append('userID', userID);
     formData.append('title', title);
@@ -100,9 +123,15 @@ function AddNewPost() {
                   type="text"
                   placeholder="Title"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setTitle(newValue);
+                    validateTitle(newValue);
+                  }}
+                  maxLength={25}
                   required
                 />
+                {titleError && <span style={{ color: 'red', fontSize: '12px' }}>{titleError}</span>}
               </div>
               <div className="Auth_formGroup">
                 <label className="Auth_label">Description</label>
