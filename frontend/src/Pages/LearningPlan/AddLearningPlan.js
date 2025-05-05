@@ -285,6 +285,7 @@ function AddLearningPlan() {
             <div className="section-title">
               <h2>Create Your Learning Plan</h2>
               <p>Fill in the details of your learning journey</p>
+              
             </div>
             <form onSubmit={handleSubmit} className="modern-form">
               <div className="form-row">
@@ -310,10 +311,10 @@ function AddLearningPlan() {
                     required
                   >
                     <option value="">Select...</option>
-                    <option value="Tech">Tech</option>
-                    <option value="Programming">Programming</option>
-                    <option value="Cooking">Cooking</option>
-                    <option value="Photography">Photography</option>
+                    <option value="Drinks">Drinks</option>
+                    <option value="Bakery">Bakery</option>
+                    <option value="cake">Cake</option>
+                    <option value="lunch">Lunch</option>
                   </select>
                   <label className="floating-label">Learning Category *</label>
                 </div>
