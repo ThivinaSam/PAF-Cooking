@@ -548,11 +548,7 @@
   overflow: hidden;
 }
 
-.template-preview .preview-media {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
+
 
 .content-layout {
   padding: 15px;
