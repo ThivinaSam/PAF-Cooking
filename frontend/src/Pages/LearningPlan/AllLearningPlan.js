@@ -255,7 +255,27 @@ function AllLearningPlan() {
             <p>Discover and track learning journeys</p>
           </div>
 
-          
+          <div className="search-wrapper">
+            <div className="search-bar glass-morphism">
+              <IoSearch className="search-icon" />
+              <input
+                type="text"
+                placeholder="Search plans..."
+                value={searchOwnerName}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setSearchOwnerName(value);
+                  setFilteredPosts(
+                    posts.filter((post) =>
+                      post.postOwnerName.toLowerCase().includes(value.toLowerCase()) ||
+                      post.title.toLowerCase().includes(value.toLowerCase()) ||
+                      post.category.toLowerCase().includes(value.toLowerCase())
+                    )
+                  );
+                }}
+              />
+            </div>
+          </div>
         </motion.div>
 
         <AnimatePresence>
