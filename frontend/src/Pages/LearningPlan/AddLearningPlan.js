@@ -9,6 +9,32 @@ import { FaVideo } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
 import { HiCalendarDateRange } from "react-icons/hi2";
 
+const VALIDATION_MESSAGES = {
+  title: {
+    required: 'Title is required',
+    format: 'Title must contain only English letters',
+    length: 'Title must be between 1-15 characters',
+  },
+  description: {
+    required: 'Description is required',
+    format: 'Description must contain only letters and numbers',
+    length: 'Description must not exceed 100 characters',
+  },
+  category: {
+    required: 'Please select a category',
+  },
+  tags: {
+    minimum: 'Please add at least 2 tags',
+    length: 'Each tag must be at least 2 characters',
+  },
+  dates: {
+    startRequired: 'Start date is required',
+    endRequired: 'End date is required',
+    pastDate: 'Start date cannot be in the past',
+    invalidRange: 'End date must be after start date',
+  },
+};
+
 function AddLearningPlan() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -27,6 +53,14 @@ function AddLearningPlan() {
   const [imageUploadError, setImageUploadError] = useState('');
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [errors, setErrors] = useState({
+    title: '',
+    description: '',
+    category: '',
+    tags: '',
+    dates: '',
+    contentURL: ''
+  });
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -111,18 +145,77 @@ function AddLearningPlan() {
     }
   };
 
+  const validateForm = () => {
+    let tempErrors = {};
+    let isValid = true;
+
+    // Title validation
+    if (!title.trim()) {
+      tempErrors.title = VALIDATION_MESSAGES.title.required;
+      isValid = false;
+    } else if (!/^[A-Za-z\s]*$/.test(title)) {
+      tempErrors.title = VALIDATION_MESSAGES.title.format;
+      isValid = false;
+    } else if (title.trim().length > 15) {
+      tempErrors.title = VALIDATION_MESSAGES.title.length;
+      isValid = false;
+    }
+
+    // Description validation
+    if (!description.trim()) {
+      tempErrors.description = VALIDATION_MESSAGES.description.required;
+      isValid = false;
+    } else if (!/^[A-Za-z0-9\s]*$/.test(description)) {
+      tempErrors.description = VALIDATION_MESSAGES.description.format;
+      isValid = false;
+    } else if (description.trim().length > 100) {
+      tempErrors.description = VALIDATION_MESSAGES.description.length;
+      isValid = false;
+    }
+
+    // Category validation
+    if (!category) {
+      tempErrors.category = VALIDATION_MESSAGES.category.required;
+      isValid = false;
+    }
+
+    // Tags validation
+    if (tags.length < 2) {
+      tempErrors.tags = VALIDATION_MESSAGES.tags.minimum;
+      isValid = false;
+    }
+    if (tags.some(tag => tag.length < 2)) {
+      tempErrors.tags = VALIDATION_MESSAGES.tags.length;
+      isValid = false;
+    }
+
+    // Date validation
+    const today = new Date().toISOString().split('T')[0];
+    if (!startDate) {
+      tempErrors.dates = VALIDATION_MESSAGES.dates.startRequired;
+      isValid = false;
+    } else if (startDate < today) {
+      tempErrors.dates = VALIDATION_MESSAGES.dates.pastDate;
+      isValid = false;
+    }
+    if (!endDate) {
+      tempErrors.dates = VALIDATION_MESSAGES.dates.endRequired;
+      isValid = false;
+    } else if (startDate >= endDate) {
+      tempErrors.dates = VALIDATION_MESSAGES.dates.invalidRange;
+      isValid = false;
+    }
+
+    setErrors(tempErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (startDate === endDate) {
-      alert("Start date and end date cannot be the same.");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (startDate > endDate) {
-      alert("Start date cannot be greater than end date.");
+    // Perform validation
+    if (!validateForm()) {
       setIsSubmitting(false);
       return;
     }
@@ -133,18 +226,6 @@ function AddLearningPlan() {
     if (!postOwnerID) {
       alert('Please log in to add a post.');
       navigate('/');
-      return;
-    }
-
-    if (tags.length < 2) {
-      alert("Please add at least two tags.");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (!templateID) {
-      alert("Please select a template.");
-      setIsSubmitting(false);
       return;
     }
 
@@ -178,6 +259,35 @@ function AddLearningPlan() {
       alert('Failed to add post.');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleTitleChange = (e) => {
+    const value = e.target.value;
+    if (/^[A-Za-z\s]*$/.test(value) || value === '') {
+      setTitle(value);
+      if (!value.trim()) {
+        setErrors(prev => ({ ...prev, title: VALIDATION_MESSAGES.title.required }));
+      } else if (value.trim().length > 15) {
+        setErrors(prev => ({ ...prev, title: VALIDATION_MESSAGES.title.length }));
+      } else {
+        setErrors(prev => ({ ...prev, title: '' }));
+      }
+    }
+  };
+
+  const handleDescriptionChange = (e) => {
+    const value = e.target.value;
+    setDescription(value);
+    
+    if (!value.trim()) {
+      setErrors(prev => ({ ...prev, description: VALIDATION_MESSAGES.description.required }));
+    } else if (value.trim().length > 100) {
+      setErrors(prev => ({ ...prev, description: VALIDATION_MESSAGES.description.length }));
+    } else if (!/^[A-Za-z0-9\s]*$/.test(value)) {
+      setErrors(prev => ({ ...prev, description: VALIDATION_MESSAGES.description.format }));
+    } else {
+      setErrors(prev => ({ ...prev, description: '' }));
     }
   };
 
@@ -294,11 +404,13 @@ function AddLearningPlan() {
                     className="form-input"
                     type="text"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={handleTitleChange}
                     placeholder=" "
                     required
+                    maxLength={15}
                   />
-                  <label className="floating-label">Learning Plan Title *</label>
+                  <label className="floating-label">Learning Plan Title * ({15 - title.length} characters remaining)</label>
+                  {errors.title && <div className="error-message">{errors.title}</div>}
                 </div>
               </div>
 
@@ -317,6 +429,7 @@ function AddLearningPlan() {
                     <option value="lunch">Lunch</option>
                   </select>
                   <label className="floating-label">Learning Category *</label>
+                  {errors.category && <div className="error-message">{errors.category}</div>}
                 </div>
 
                 <div className="form-group tags-container">
@@ -348,6 +461,7 @@ function AddLearningPlan() {
                       </span>
                     ))}
                   </div>
+                  {errors.tags && <div className="error-message">{errors.tags}</div>}
                 </div>
               </div>
 
@@ -374,6 +488,7 @@ function AddLearningPlan() {
                   />
                   <label className="floating-label">Target End Date *</label>
                 </div>
+                {errors.dates && <div className="error-message">{errors.dates}</div>}
               </div>
 
               <div className="form-row">
@@ -381,12 +496,14 @@ function AddLearningPlan() {
                   <textarea
                     className="form-textarea"
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={handleDescriptionChange}
                     placeholder=" "
                     required
                     rows={4}
+                    maxLength={100}
                   />
-                  <label className="floating-label">Learning Plan Description *</label>
+                  <label className="floating-label">Learning Plan Description * ({100 - description.length} characters remaining)</label>
+                  {errors.description && <div className="error-message">{errors.description}</div>}
                 </div>
               </div>
 
@@ -418,6 +535,7 @@ function AddLearningPlan() {
                       placeholder=" "
                     />
                     <label className="floating-label">Video URL</label>
+                    {errors.contentURL && <div className="error-message">{errors.contentURL}</div>}
                   </div>
                 )}
 
