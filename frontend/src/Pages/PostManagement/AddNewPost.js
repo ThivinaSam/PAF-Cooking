@@ -134,129 +134,128 @@ function AddNewPost() {
   };
 
   return (
-    <div>
-      <div className='continer'>
-        <NavBar />
-        <div className='continSection'>
-          <div className="from_continer">
-            <p className="Auth_heading">Add a New Post</p>
-            <form onSubmit={handleSubmit} className='from_data'>
-              <div className="Auth_formGroup">
-                <label className="Auth_label">Title</label>
-                <input
-                  className="Auth_input"
-                  type="text"
-                  placeholder="Title (max 25 words)"
-                  value={title}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    setTitle(newValue);
-                    validateTitle(newValue);
-                  }}
-                  required
-                />
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
-                  {titleError && 
-                    <span style={{ color: 'red', fontSize: '12px' }}>
-                      {titleError}
-                    </span>
-                  }
-                  <span style={{ 
-                    fontSize: '12px', 
-                    color: titleWordCount > 25 ? 'red' : 'green' 
-                  }}>
-                    {titleWordCount} words
-                  </span>
-                </div>
-              </div>
-              <div className="Auth_formGroup">
-                <label className="Auth_label">Description</label>
-                <textarea
-                  className="Auth_input"
-                  placeholder="Description (10-50 words)"
-                  value={description}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    setDescription(newValue);
-                    validateDescription(newValue);
-                  }}
-                  required
-                  rows={3}
-                />
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
-                  {descriptionError && 
-                    <span style={{ color: 'red', fontSize: '12px' }}>
-                      {descriptionError}
-                    </span>
-                  }
-                  <span style={{ 
-                    fontSize: '12px', 
-                    color: wordCount < 10 ? 'red' : wordCount > 50 ? 'red' : 'green' 
-                  }}>
-                    {wordCount} words
-                  </span>
-                </div>
-              </div>
-              <div className="Auth_formGroup">
-                <label className="Auth_label">Category</label>
-                <select
-                  className="Auth_input"
-                  value={categories}
-                  onChange={(e) => {
-                    setCategories(e.target.value);
-                    if (e.target.value !== 'Others') {
-                      setCustomCategory('');
-                    }
-                  }}
-                  required
-                >
-                  <option value="" disabled>Select Category</option>
-                  <option value="Tech">Tech</option>
-                  <option value="Programming">Programming</option>
-                  <option value="Cooking">Cooking</option>
-                  <option value="Photography">Photography</option>
-                  <option value="Others">Others</option>
-                </select>
-                {categories === 'Others' && (
-                  <input
-                    className="Auth_input"
-                    type="text"
-                    placeholder="Enter custom category"
-                    value={customCategory}
-                    onChange={(e) => setCustomCategory(e.target.value)}
-                    style={{ marginTop: '10px' }}
-                    required
-                  />
-                )}
-              </div>
-              <div className="Auth_formGroup">
-                <label className="Auth_label">Media</label>
-                <div className='seket_media'>
-                  {mediaPreviews.map((preview, index) => (
-                    <div key={index}>
-                      {preview.type.startsWith('video/') ? (
-                        <video controls className='media_file_se'>
-                          <source src={preview.url} type={preview.type} />
-                          Your browser does not support the video tag.
-                        </video>
-                      ) : (
-                        <img className='media_file_se' src={preview.url} alt={`Media Preview ${index}`} />
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <input
-                  className="Auth_input"
-                  type="file"
-                  accept="image/jpeg,image/png,image/jpg,video/mp4"
-                  multiple
-                  onChange={handleMediaChange}
-                />
-              </div>
-              <button type="submit" className="Auth_button">Submit</button>
-            </form>
+    <div className="post-container">
+      <NavBar />
+      <div className="post-form-container">
+        <h1 className="post-heading">Create New Post</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Title</label>
+            <input
+              className="form-input"
+              type="text"
+              placeholder="Enter an engaging title..."
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                validateTitle(e.target.value);
+              }}
+              required
+            />
+            <div className="word-counter">
+              {titleError && 
+                <span style={{ color: '#e74c3c' }}>{titleError}</span>
+              }
+              <span style={{ 
+                color: titleWordCount > 25 ? '#e74c3c' : '#2ecc71' 
+              }}>
+                {titleWordCount}/25 words
+              </span>
+            </div>
           </div>
-        </div>
+
+          <div className="form-group">
+            <label className="form-label">Description</label>
+            <textarea
+              className="form-input"
+              placeholder="Share your thoughts (10-50 words)..."
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+                validateDescription(e.target.value);
+              }}
+              required
+              rows={4}
+            />
+            <div className="word-counter">
+              {descriptionError && 
+                <span style={{ color: '#e74c3c' }}>{descriptionError}</span>
+              }
+              <span style={{ 
+                color: wordCount < 10 || wordCount > 50 ? '#e74c3c' : '#2ecc71' 
+              }}>
+                {wordCount}/50 words
+              </span>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Category</label>
+            <select
+              className="form-input"
+              value={categories}
+              onChange={(e) => {
+                setCategories(e.target.value);
+                if (e.target.value !== 'Others') setCustomCategory('');
+              }}
+              required
+            >
+              <option value="" disabled>Select a category</option>
+              <option value="Tech">Technology</option>
+              <option value="Programming">Programming</option>
+              <option value="Cooking">Cooking</option>
+              <option value="Photography">Photography</option>
+              <option value="Others">Others</option>
+            </select>
+            {categories === 'Others' && (
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Specify your category..."
+                value={customCategory}
+                onChange={(e) => setCustomCategory(e.target.value)}
+                style={{ marginTop: '0.5rem' }}
+                required
+              />
+            )}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Media</label>
+            <div className="media-preview">
+              {mediaPreviews.map((preview, index) => (
+                <div key={index} className="media-item">
+                  {preview.type.startsWith('video/') ? (
+                    <video controls>
+                      <source src={preview.url} type={preview.type} />
+                      Your browser does not support video playback.
+                    </video>
+                  ) : (
+                    <img src={preview.url} alt={`Preview ${index + 1}`} />
+                  )}
+                </div>
+              ))}
+            </div>
+            <input
+              className="form-input"
+              type="file"
+              accept="image/jpeg,image/png,image/jpg,video/mp4"
+              multiple
+              onChange={handleMediaChange}
+            />
+            <small style={{ 
+              display: 'block', 
+              marginTop: '0.5rem', 
+              color: '#666' 
+            }}>
+              Upload up to 3 images (JPG, PNG) or 1 video (MP4, max 30 seconds)
+            </small>
+          </div>
+
+          <button type="submit" className="submit-button">
+            Create Post
+          </button>
+        </form>
       </div>
     </div>
   );
