@@ -208,6 +208,7 @@ function AddNewPost() {
                   <option value="Programming">Programming</option>
                   <option value="Cooking">Cooking</option>
                   <option value="Photography">Photography</option>
+                  <option value="Others">Others</option>
                 </select>
               </div>
               <div className="Auth_formGroup">
