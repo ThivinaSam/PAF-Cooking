@@ -124,7 +124,7 @@
   transition: background 0.2s ease;
 }
 .not_found_btn:hover {
-  background: #490033;
+  background: #2563eb;
 }
 .not_found_msg {
   color: #676565;
