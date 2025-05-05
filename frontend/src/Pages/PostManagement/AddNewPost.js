@@ -11,6 +11,7 @@ function AddNewPost() {
   const [categories, setCategories] = useState(''); // New state for categories
   const [wordCount, setWordCount] = useState(0); // Add this state at the top with other state declarations
   const [titleWordCount, setTitleWordCount] = useState(0);
+  const [customCategory, setCustomCategory] = useState(''); // Add new state for custom category
   const userID = localStorage.getItem('userID');
 
   const validateTitle = (value) => {
@@ -115,7 +116,8 @@ function AddNewPost() {
     formData.append('userID', userID);
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('category', categories); // Include category in form data
+    // Use custom category if "Others" is selected
+    formData.append('category', categories === 'Others' ? customCategory : categories);
     media.forEach((file, index) => formData.append(`mediaFiles`, file));
 
     try {
@@ -200,7 +202,12 @@ function AddNewPost() {
                 <select
                   className="Auth_input"
                   value={categories}
-                  onChange={(e) => setCategories(e.target.value)}
+                  onChange={(e) => {
+                    setCategories(e.target.value);
+                    if (e.target.value !== 'Others') {
+                      setCustomCategory('');
+                    }
+                  }}
                   required
                 >
                   <option value="" disabled>Select Category</option>
@@ -210,6 +217,17 @@ function AddNewPost() {
                   <option value="Photography">Photography</option>
                   <option value="Others">Others</option>
                 </select>
+                {categories === 'Others' && (
+                  <input
+                    className="Auth_input"
+                    type="text"
+                    placeholder="Enter custom category"
+                    value={customCategory}
+                    onChange={(e) => setCustomCategory(e.target.value)}
+                    style={{ marginTop: '10px' }}
+                    required
+                  />
+                )}
               </div>
               <div className="Auth_formGroup">
                 <label className="Auth_label">Media</label>
