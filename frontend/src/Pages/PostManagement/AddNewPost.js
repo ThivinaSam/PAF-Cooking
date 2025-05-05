@@ -5,6 +5,7 @@ function AddNewPost() {
   const [title, setTitle] = useState('');
   const [titleError, setTitleError] = useState(''); // Add this new state
   const [description, setDescription] = useState('');
+  const [descriptionError, setDescriptionError] = useState(''); // Add this new state
   const [media, setMedia] = useState([]);
   const [mediaPreviews, setMediaPreviews] = useState([]); // For storing media preview objects
   const [categories, setCategories] = useState(''); // New state for categories
@@ -22,6 +23,19 @@ function AddNewPost() {
       return false;
     } else {
       setTitleError('');
+      return true;
+    }
+  };
+
+  const validateDescription = (value) => {
+    if (value.length < 10) {
+      setDescriptionError('Description must be at least 10 characters');
+      return false;
+    } else if (value.length > 50) {
+      setDescriptionError('Description must not exceed 50 characters');
+      return false;
+    } else {
+      setDescriptionError('');
       return true;
     }
   };
@@ -83,8 +97,8 @@ function AddNewPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate title before submission
-    if (!validateTitle(title)) {
+    // Validate title and description before submission
+    if (!validateTitle(title) || !validateDescription(description)) {
       return;
     }
     
@@ -137,12 +151,18 @@ function AddNewPost() {
                 <label className="Auth_label">Description</label>
                 <textarea
                   className="Auth_input"
-                  placeholder="Description"
+                  placeholder="Description (10-50 characters)"
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setDescription(newValue);
+                    validateDescription(newValue);
+                  }}
                   required
                   rows={3}
+                  maxLength={50}
                 />
+                {descriptionError && <span style={{ color: 'red', fontSize: '12px' }}>{descriptionError}</span>}
               </div>
               <div className="Auth_formGroup">
                 <label className="Auth_label">Category</label>
