@@ -170,7 +170,7 @@ input[type="file"].Auth_input::file-selector-button {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   border: none;
-  background: #3b82f6;
+  background: #2c2c47;
   color: white;
   font-weight: 500;
   margin-right: 1rem;
@@ -179,7 +179,7 @@ input[type="file"].Auth_input::file-selector-button {
 }
 
 input[type="file"].Auth_input::file-selector-button:hover {
-  background: #2563eb;
+  background: #8c8e93;
 }
 
 /* Error and word count styling */
