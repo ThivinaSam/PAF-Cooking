@@ -516,13 +516,7 @@ function AddLearningPlan() {
                   >
                     <FaVideo /> <span>Add Video</span>
                   </button>
-                  <button 
-                    type="button" 
-                    className={`media-btn ${showImageUploadInput ? 'active' : ''}`}
-                    onClick={() => setShowImageUploadInput(!showImageUploadInput)}
-                  >
-                    <FaImage /> <span>Add Image</span>
-                  </button>
+                  
                 </div>
 
                 {showContentURLInput && (
