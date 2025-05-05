@@ -299,7 +299,6 @@ function AllPost() {
     const filtered = posts.filter(
       (post) =>
         post.title.toLowerCase().includes(query) ||
-        post.description.toLowerCase().includes(query) ||
         (post.category && post.category.toLowerCase().includes(query))
     );
     setFilteredPosts(filtered);

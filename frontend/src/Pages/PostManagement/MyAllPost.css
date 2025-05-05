@@ -1,10 +1,8 @@
 .social-interaction-section {
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  margin-top: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid #eee;
+  margin-top: auto; /* Push to bottom of card */
 }
 
 .interaction-stats {
@@ -46,7 +44,10 @@
 .comment-input-wrapper {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: #f8f8f8;
+  border-radius: 12px;
 }
 
 .user-avatar {
@@ -65,16 +66,17 @@
 .input-container {
   flex: 1;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .comment-input {
   width: 100%;
-  padding: 1rem 3rem 1rem 1.5rem;
-  border: 2px solid transparent;
+  padding: 0.75rem 3rem 0.75rem 1rem;
+  border: 1px solid #ddd;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
 }
 
 .comment-input:focus {
@@ -86,14 +88,16 @@
 
 .send-button {
   position: absolute;
-  right: 12px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  padding: 6px;
   border: none;
   background: none;
   color: #667eea;
   cursor: pointer;
-  padding: 8px;
   border-radius: 50%;
   transition: all 0.3s ease;
 }
@@ -103,16 +107,19 @@
   transform: translateY(-50%) scale(1.1);
 }
 
+/* Add/update these modal styles */
 .media-modal {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw;
-  max-width: 1200px;
-  background: transparent;
+  background-color: white;
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
   outline: none;
-  padding: 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .media-modal-overlay {
@@ -121,81 +128,61 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
 .modal-content {
   width: 100%;
   height: 100%;
-  position: relative;
-  animation: modalFadeIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
-  position: absolute;
-  top: 0;
-  right: 0;
   padding: 1rem;
-  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .close-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: none;
   border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 24px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  color: #666;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
 }
 
 .close-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
-}
-
-.close-icon {
-  color: white;
-  font-size: 24px;
-  font-weight: 300;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .modal-body {
-  height: 90vh;
+  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
-.image-wrapper, .video-wrapper {
+.video-wrapper, .image-wrapper {
   max-width: 100%;
-  max-height: 90vh;
+  max-height: calc(90vh - 100px);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.modal-image {
+.modal-video, .modal-image {
   max-width: 100%;
-  max-height: 90vh;
+  max-height: calc(90vh - 100px);
   object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.modal-video {
-  max-width: 100%;
-  max-height: 90vh;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes modalFadeIn {
@@ -218,19 +205,22 @@
 .content-wrapper {
   max-width: 1400px;
   margin: 0 auto;
-  padding-top: 80px;
+  padding: 100px 2rem 2rem 2rem;
 }
 
 .search-container {
   position: sticky;
   top: 80px;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 3rem auto;
 }
 
 .search-bar {
@@ -301,9 +291,74 @@
   z-index: 100;
 }
 
+/* Update the posts grid layout */
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
-  padding: 1rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Update post card styles */
+.post_card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 400px;
+  margin-bottom: 1rem;
+}
+
+/* Update media collage layout */
+.media-collage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 12px;
+  background: #f8f8f8;
+  height: 250px; /* Fixed height for consistent card sizes */
+}
+
+.media-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 100%;
+}
+
+/* Add proper spacing for post content */
+.user_details_card {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.user_details_card_di {
+  padding: 1rem;
+  flex: 1;
+}
+
+/* Add responsive adjustments */
+@media screen and (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  .search-container {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .post_card {
+    min-height: 350px;
+  }
 }

@@ -211,10 +211,10 @@ function AddNewPost() {
                   required
                 >
                   <option value="" disabled>Select Category</option>
-                  <option value="Tech">Tech</option>
-                  <option value="Programming">Programming</option>
+                  <option value="Tech">Drinks</option>
+                  <option value="Programming">Bakery</option>
                   <option value="Cooking">Cooking</option>
-                  <option value="Photography">Photography</option>
+                  <option value="Photography">Cakes and Sweets</option>
                   <option value="Others">Others</option>
                 </select>
                 {categories === 'Others' && (
