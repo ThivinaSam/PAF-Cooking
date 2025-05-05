@@ -10,14 +10,18 @@ function AddNewPost() {
   const [mediaPreviews, setMediaPreviews] = useState([]); // For storing media preview objects
   const [categories, setCategories] = useState(''); // New state for categories
   const [wordCount, setWordCount] = useState(0); // Add this state at the top with other state declarations
+  const [titleWordCount, setTitleWordCount] = useState(0);
   const userID = localStorage.getItem('userID');
 
   const validateTitle = (value) => {
     // Check for alphanumeric characters only
     const alphanumericRegex = /^[a-zA-Z0-9\s]*$/;
+    const words = value.trim().split(/\s+/).filter(word => word.length > 0);
+    const currentWordCount = words.length;
+    setTitleWordCount(currentWordCount);
     
-    if (value.length > 25) {
-      setTitleError('Title must not exceed 25 characters');
+    if (currentWordCount > 25) {
+      setTitleError('Title must not exceed 25 words');
       return false;
     } else if (!alphanumericRegex.test(value)) {
       setTitleError('Title can only contain letters and numbers');
@@ -140,17 +144,28 @@ function AddNewPost() {
                 <input
                   className="Auth_input"
                   type="text"
-                  placeholder="Title"
+                  placeholder="Title (max 25 words)"
                   value={title}
                   onChange={(e) => {
                     const newValue = e.target.value;
                     setTitle(newValue);
                     validateTitle(newValue);
                   }}
-                  maxLength={25}
                   required
                 />
-                {titleError && <span style={{ color: 'red', fontSize: '12px' }}>{titleError}</span>}
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
+                  {titleError && 
+                    <span style={{ color: 'red', fontSize: '12px' }}>
+                      {titleError}
+                    </span>
+                  }
+                  <span style={{ 
+                    fontSize: '12px', 
+                    color: titleWordCount > 25 ? 'red' : 'green' 
+                  }}>
+                    {titleWordCount} words
+                  </span>
+                </div>
               </div>
               <div className="Auth_formGroup">
                 <label className="Auth_label">Description</label>
