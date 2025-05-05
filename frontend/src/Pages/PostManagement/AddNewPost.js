@@ -9,6 +9,7 @@ function AddNewPost() {
   const [media, setMedia] = useState([]);
   const [mediaPreviews, setMediaPreviews] = useState([]); // For storing media preview objects
   const [categories, setCategories] = useState(''); // New state for categories
+  const [wordCount, setWordCount] = useState(0); // Add this state at the top with other state declarations
   const userID = localStorage.getItem('userID');
 
   const validateTitle = (value) => {
@@ -28,11 +29,15 @@ function AddNewPost() {
   };
 
   const validateDescription = (value) => {
-    if (value.length < 10) {
-      setDescriptionError('Description must be at least 10 characters');
+    const words = value.trim().split(/\s+/).filter(word => word.length > 0);
+    const currentWordCount = words.length;
+    setWordCount(currentWordCount);
+
+    if (currentWordCount < 10) {
+      setDescriptionError('Description must have at least 10 words');
       return false;
-    } else if (value.length > 50) {
-      setDescriptionError('Description must not exceed 50 characters');
+    } else if (currentWordCount > 50) {
+      setDescriptionError('Description must not exceed 50 words');
       return false;
     } else {
       setDescriptionError('');
@@ -151,7 +156,7 @@ function AddNewPost() {
                 <label className="Auth_label">Description</label>
                 <textarea
                   className="Auth_input"
-                  placeholder="Description (10-50 characters)"
+                  placeholder="Description (10-50 words)"
                   value={description}
                   onChange={(e) => {
                     const newValue = e.target.value;
@@ -160,9 +165,20 @@ function AddNewPost() {
                   }}
                   required
                   rows={3}
-                  maxLength={50}
                 />
-                {descriptionError && <span style={{ color: 'red', fontSize: '12px' }}>{descriptionError}</span>}
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
+                  {descriptionError && 
+                    <span style={{ color: 'red', fontSize: '12px' }}>
+                      {descriptionError}
+                    </span>
+                  }
+                  <span style={{ 
+                    fontSize: '12px', 
+                    color: wordCount < 10 ? 'red' : wordCount > 50 ? 'red' : 'green' 
+                  }}>
+                    {wordCount} words
+                  </span>
+                </div>
               </div>
               <div className="Auth_formGroup">
                 <label className="Auth_label">Category</label>
