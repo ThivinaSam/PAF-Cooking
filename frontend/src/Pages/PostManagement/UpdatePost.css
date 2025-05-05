@@ -69,7 +69,7 @@
 .form-group textarea:not(:placeholder-shown) ~ label {
   transform: translateY(-1.4rem) scale(0.85);
   background: white;
-  color: #667eea;
+  color: #02642c;
 }
 
 .media-section {
