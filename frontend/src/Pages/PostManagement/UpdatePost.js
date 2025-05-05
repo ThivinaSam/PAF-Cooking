@@ -183,20 +183,7 @@ function UpdatePost() {
                 <label>Description</label>
               </div>
 
-              <div className="form-group">
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                >
-                  <option value="" disabled>Select Category</option>
-                  <option value="Tech">Tech</option>
-                  <option value="Programming">Programming</option>
-                  <option value="Cooking">Cooking</option>
-                  <option value="Photography">Photography</option>
-                </select>
-              </div>
-
+             
               <div className="media-section">
                 <h3>Media Files</h3>
                 <div className="media-preview">
