@@ -61,24 +61,7 @@
   top: 160px;
   text-align: start;
 }
-.not_found_box {
-  width: 670px;
-  border: 1px solid #004c5d;
-  border-radius: 5px;
-  justify-content: center;
-  padding: 25px;
-  gap: 25px;
-  flex-direction: column;
-  align-items: center;
-  display: flex;
-  text-align: center;
-  padding: 3rem;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  margin: 2rem auto;
-}
+
 .post_card {
   width: 670px;
   border: 1px solid #004c5d;
