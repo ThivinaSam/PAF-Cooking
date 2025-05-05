@@ -139,7 +139,7 @@ function AddNewPost() {
         <NavBar />
         <div className='continSection'>
           <div className="from_continer">
-            <p className="Auth_heading">Add a New Post</p>
+            <p className="Auth_heading">Add a New Post...</p>
             <form onSubmit={handleSubmit} className='from_data'>
               <div className="Auth_formGroup">
                 <label className="Auth_label">Title</label>
