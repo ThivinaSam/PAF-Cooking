@@ -333,7 +333,7 @@ function AllLearningPlan() {
         <motion.button
           className="floating-add-btn"
           whileHover={{ scale: 1.1, rotate: 180 }}
-          whileTap={{ scale: 0.9 }}
+          whileTap={{ scale: 0.8 }}
           onClick={() => window.location.href = '/addLearningPlan'}
         >
           <IoIosCreate />
