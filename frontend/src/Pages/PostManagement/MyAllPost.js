@@ -636,7 +636,9 @@ function MyAllPost() {
                                 <div className="comment-main">
                                   <div className="comment-header">
                                     <h5>{comment.userFullName}</h5>
-                                    <span className="comment-time">Just now</span>
+                                    <span className="comment-time">
+                                      {comment.createdAt ? formatTimeAgo(comment.createdAt) : 'Just now'}
+                                    </span>
                                   </div>
                                   
                                   {editingComment.id === comment.id ? (
