@@ -328,7 +328,7 @@ textarea.has-value ~ .floating-label {
 
 .submit-button {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: rgb(218, 32, 32);
+  color: white;
 }
 
 .cancel-button {
