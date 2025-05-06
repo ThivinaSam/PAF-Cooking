@@ -102,7 +102,7 @@
     pointer-events: none;
 }
 
-.form-input:none,
+.form-input:focus,
 .form-input:not(:placeholder-shown) {
     border-color: #667eea;
     outline: none;
