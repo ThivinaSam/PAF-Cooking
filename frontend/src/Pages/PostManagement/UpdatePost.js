@@ -163,7 +163,27 @@ function UpdatePost() {
             </div>
 
             <form onSubmit={handleSubmit} className="modern-form">
-             
+              <div className="form-group">
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  placeholder=" "
+                />
+                <label>Title</label>
+              </div>
+
+              <div className="form-group">
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  placeholder=" "
+                  rows={5}
+                />
+                <label>Description</label>
+              </div>
 
               <div className="form-group">
                 <select
