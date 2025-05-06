@@ -14,7 +14,7 @@ function UserLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login attempt:', formData);
+
     try {
       const response = await fetch('http://localhost:8080/login', {
         method: 'POST',
