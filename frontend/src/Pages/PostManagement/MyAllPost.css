@@ -19,6 +19,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(135deg, #f6f8fd 0%, #f0f3fa 100%);
+  padding-top: 60px; /* Height of NavBar */
+  position: relative;
 }
 
 .content-wrapper {
@@ -26,80 +29,121 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 24px 16px 64px;
+  padding-top: 1rem; /* Reduced top padding since search is sticky */
 }
 
-/* Search Container */
+/* Search Container with Icon */
 .search-container {
-  margin-bottom: 24px;
   position: sticky;
-  top: 70px;
-  z-index: 10;
-  backdrop-filter: blur(8px);
-  padding: 12px 0;
+  top: 60px; /* Height of NavBar */
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  padding: 1.25rem 2rem;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+.search-container.scrolled {
+  padding: 0.75rem 2rem;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Modern Search Bar with Icon */
 .search-bar {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  padding: 16px 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .search-bar:hover {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .search-bar input {
   width: 100%;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  background-color: #f1f5f9;
-  color: #334155;
-  transition: all 0.2s ease;
+  padding: 1rem 1.5rem 1rem 3.5rem; /* Increased left padding for icon */
+  border: 2px solid transparent;
+  border-radius: 16px;
+  font-size: 1rem;
+  background-color: #f8fafc;
+  color: #1e293b;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar input:hover {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .search-bar input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+  border-color: #6366f1;
   background-color: #fff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
 .search-bar input::placeholder {
   color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* Remove the old search icon pseudo-element */
+.search-bar::before {
+  display: none;
 }
 
 .filter-chips {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 0.8rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
 }
 
+/* Enhanced Filter Chips */
 .chip {
-  padding: 8px 20px;
-  border: none;
-  background-color: #f1f5f9;
-  color: #64748b;
+  padding: 0.6rem 1.2rem;
+  background: #fff;
+  border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 30px;
-  font-size: 14px;
+  color: #6366f1;
   font-weight: 500;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .chip:hover {
-  background-color: #e2e8f0;
-  color: #334155;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+  border-color: #6366f1;
 }
 
 .chip.active {
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  border: none;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
 /* Create Post Button */
@@ -236,6 +280,98 @@ body {
 
 .action-button.delete:hover {
   background: rgba(239, 68, 68, 0.1);
+}
+
+/* Post Actions Container */
+.owner-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Icon Buttons Base Styles */
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Edit Button Styles */
+.icon-button.edit {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+.icon-button.edit:hover {
+  background: #6366f1;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.icon-button.edit:active {
+  transform: translateY(0);
+}
+
+/* Delete Button Styles */
+.icon-button.delete {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.icon-button.delete:hover {
+  background: #ef4444;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.icon-button.delete:active {
+  transform: translateY(0);
+}
+
+/* Icon Sizes */
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.icon-button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Tooltip Styles */
+.icon-button::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background: #1e293b;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.icon-button:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
 }
 
 .owner-actions {
@@ -822,6 +958,39 @@ body {
   background: #e2e8f0;
 }
 
+/* Delete Confirmation Modal */
+.delete-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-width: 400px;
+  width: 90%;
+}
+
+.delete-modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+/* Success Animation */
+@keyframes successPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.success-animation {
+  animation: successPop 0.3s ease;
+}
+
 /* Success/Error Notifications */
 .notification {
   position: fixed;
@@ -869,18 +1038,44 @@ body {
   }
   
   .search-bar input {
-    padding: 10px 14px;
+    padding: 0.875rem 1.25rem 0.875rem 3rem;
+    font-size: 0.95rem;
+  }
+  
+  .search-icon {
+    left: 1rem;
+    width: 18px;
+    height: 18px;
   }
   
   .filter-chips {
     gap: 8px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+    margin-top: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
   }
-  
+
+  .filter-chips::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+
   .chip {
-    padding: 6px 16px;
-    font-size: 13px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .search-container {
+    padding: 1rem;
   }
   
+  .search-container.scrolled {
+    padding: 0.75rem 1rem;
+  }
+
   .create-post-btn {
     bottom: 1.5rem;
     right: 1.5rem;
@@ -903,6 +1098,16 @@ body {
   .action-button {
     width: 32px;
     height: 32px;
+  }
+
+  .icon-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-button svg {
+    width: 16px;
+    height: 16px;
   }
 
   .delete-confirmation {
@@ -964,4 +1169,52 @@ body {
   .confirmation-buttons {
     flex-direction: column;
   }
+}
+
+/* Video Thumbnail */
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.hidden-video {
+  width: 0;
+  height: 0;
+  position: absolute;
+  visibility: hidden;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+.video-overlay:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.play-icon {
+  font-size: 2.5rem;
+  color: white;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.media-item:hover .play-icon {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { IoSend, IoAdd } from "react-icons/io5";
+import { IoSend, IoAdd, IoSearch, IoPlay } from "react-icons/io5";
 import { FaEdit, FaCommentAlt } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { BiSolidLike } from "react-icons/bi";
@@ -82,6 +82,22 @@ function MyAllPost() {
     };
 
     fetchFollowedUsers();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer) {
+        if (window.scrollY > 10) {
+          searchContainer.classList.add('scrolled');
+        } else {
+          searchContainer.classList.remove('scrolled');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleDelete = async (postId) => {
@@ -322,16 +338,21 @@ function MyAllPost() {
   };
 
   const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
+    const query = e.target.value.toLowerCase().trim();
     setSearchQuery(query);
-
-    // Filter posts based on title, description, or category
-    const filtered = posts.filter(
-      (post) =>
-        post.title.toLowerCase().includes(query) ||
-        post.description.toLowerCase().includes(query) ||
-        (post.category && post.category.toLowerCase().includes(query))
-    );
+  
+    if (query === '') {
+      setFilteredPosts(posts); // Reset to all posts when search is empty
+      return;
+    }
+  
+    const filtered = posts.filter((post) => {
+      const titleMatch = post.title.toLowerCase().includes(query);
+      const categoryMatch = post.category ? post.category.toLowerCase().includes(query) : false;
+      
+      return titleMatch || categoryMatch;
+    });
+  
     setFilteredPosts(filtered);
   };
 
@@ -354,7 +375,7 @@ function MyAllPost() {
     if (!post.media || post.media.length === 0) {
       return null;
     }
-
+  
     return (
       <div className={`media-collage media-count-${Math.min(post.media.length, 4)}`}>
         {post.media.slice(0, 4).map((mediaUrl, index) => (
@@ -366,10 +387,17 @@ function MyAllPost() {
             transition={{ duration: 0.2 }}
           >
             {mediaUrl.endsWith('.mp4') ? (
-              <video>
-                <source src={`http://localhost:8080${mediaUrl}`} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="video-thumbnail">
+                <video 
+                  preload="metadata"
+                  className="hidden-video"
+                >
+                  <source src={`http://localhost:8080${mediaUrl}`} type="video/mp4" />
+                </video>
+                <div className="video-overlay">
+                  <IoPlay className="play-icon" />
+                </div>
+              </div>
             ) : (
               <img src={`http://localhost:8080${mediaUrl}`} alt="Post Media" />
             )}
@@ -397,6 +425,7 @@ function MyAllPost() {
           transition={{ delay: 0.2 }}
         >
           <div className="search-bar">
+            <IoSearch className="search-icon" />
             <input
               type="text"
               placeholder="Search for recipes, people, and more..."
@@ -488,14 +517,18 @@ function MyAllPost() {
                           <motion.button 
                             className='icon-button edit'
                             onClick={() => handleUpdate(post.id)}
-                            whileHover={{ scale: 1.1, backgroundColor: 'rgba(102, 126, 234, 0.1)' }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            data-tooltip="Edit Post"
                           >
                             <FaEdit />
                           </motion.button>
                           <motion.button 
                             className='icon-button delete'
                             onClick={() => handleDelete(post.id)}
-                            whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, 0.1)' }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            data-tooltip="Delete Post"
                           >
                             <RiDeleteBin6Fill />
                           </motion.button>
