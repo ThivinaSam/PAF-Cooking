@@ -539,7 +539,7 @@ function AllPost() {
                                 </>
                               ) : (
                                 <>
-                                  <GrUpdate className='coment_btn' onClick={() =>
+                                  <FaEdit className='coment_btn' onClick={() =>
                                     setEditingComment({ id: comment.id, content: comment.content })
                                   } />
                                   <MdDelete className='coment_btn' onClick={() => handleDeleteComment(post.id, comment.id)} />
