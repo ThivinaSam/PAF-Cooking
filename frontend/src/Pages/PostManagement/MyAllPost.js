@@ -162,7 +162,28 @@ function MyAllPost() {
     try {
       await axios.delete(`http://localhost:8080/posts/${postId}`);
       
+      // Show success notification
+      const notification = document.createElement('div');
+      notification.className = 'success-notification';
+      notification.textContent = 'Post deleted successfully!';
+      document.body.appendChild(notification);
       
+      setTimeout(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+          setTimeout(() => document.body.removeChild(notification), 300);
+        }, 2000);
+      }, 100);
+      
+      setPosts(posts.filter((post) => post.id !== postId));
+      setFilteredPosts(filteredPosts.filter((post) => post.id !== postId));
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      alert('Failed to delete post.');
+    }
+  };
+
   const handleUpdate = (postId) => {
     navigate(`/updatePost/${postId}`);
   };
