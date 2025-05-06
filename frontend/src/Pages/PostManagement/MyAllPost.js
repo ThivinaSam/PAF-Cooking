@@ -26,6 +26,7 @@ function MyAllPost() {
   const [editingComment, setEditingComment] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
+  const [currentTime, setCurrentTime] = useState(new Date());
   const navigate = useNavigate();
   const loggedInUserID = localStorage.getItem('userID');
 
@@ -119,6 +120,14 @@ function MyAllPost() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // Update every minute
+
+    return () => clearInterval(timer);
   }, []);
 
   const handleDelete = async (postId) => {
