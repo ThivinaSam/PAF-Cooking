@@ -16,8 +16,24 @@ import './MyAllPost.css';
 Modal.setAppElement('#root');
 
 const formatTimeAgo = (dateString) => {
+  // Handle invalid or empty date strings
+  if (!dateString) return 'Just now';
+  
+  let postDate;
+  try {
+    // Try parsing the date
+    postDate = new Date(dateString);
+    
+    // Check if date is valid
+    if (isNaN(postDate.getTime())) {
+      return 'Recently';
+    }
+  } catch (error) {
+    console.error("Error parsing date:", error);
+    return 'Recently';
+  }
+
   const now = new Date();
-  const postDate = new Date(dateString);
   const secondsAgo = Math.floor((now - postDate) / 1000);
 
   if (secondsAgo < 60) {
@@ -32,7 +48,8 @@ const formatTimeAgo = (dateString) => {
     const days = Math.floor(secondsAgo / 86400);
     return `${days} ${days === 1 ? 'day' : 'days'} ago`;
   } else {
-    return postDate.toLocaleDateString();
+    // Format date as day/month/year
+    return `${postDate.getDate()}/${postDate.getMonth() + 1}/${postDate.getFullYear()}`;
   }
 };
 
@@ -60,11 +77,19 @@ function MyAllPost() {
         // Filter posts to include only those with the logged-in user's ID
         const userPosts = response.data.filter((post) => post.userID === userID);
 
-        setPosts(userPosts);
-        setFilteredPosts(userPosts);
+        // Make sure all posts have a valid createdAt date
+        const processedPosts = userPosts.map(post => {
+          if (!post.createdAt || isNaN(new Date(post.createdAt).getTime())) {
+            return { ...post, createdAt: new Date().toISOString() };
+          }
+          return post;
+        });
+
+        setPosts(processedPosts);
+        setFilteredPosts(processedPosts);
 
         // Fetch post owners' names
-        const userIDs = [...new Set(userPosts.map((post) => post.userID))];
+        const userIDs = [...new Set(processedPosts.map((post) => post.userID))];
         const ownerPromises = userIDs.map((userID) =>
           axios.get(`http://localhost:8080/user/${userID}`)
             .then((res) => ({
@@ -176,10 +201,12 @@ function MyAllPost() {
         setFilteredPosts(sortedByLikes);
         break;
       case 'Recent':
-        // Assuming posts have a createdAt field
-        const sortedByDate = [...posts].sort((a, b) => 
-          new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
-        );
+        // Ensure valid dates for sorting
+        const sortedByDate = [...posts].sort((a, b) => {
+          const dateA = new Date(a.createdAt || 0);
+          const dateB = new Date(b.createdAt || 0);
+          return isNaN(dateB.getTime()) || isNaN(dateA.getTime()) ? 0 : dateB - dateA;
+        });
         setFilteredPosts(sortedByDate);
         break;
       case 'Following':
@@ -623,7 +650,7 @@ function MyAllPost() {
                           {post.comments?.map((comment) => (
                             <motion.div 
                               key={comment.id} 
-                              className='comment-card'
+                              className="comment-card"
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, height: 0 }}
