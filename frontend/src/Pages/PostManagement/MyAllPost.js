@@ -84,6 +84,22 @@ function MyAllPost() {
     fetchFollowedUsers();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer) {
+        if (window.scrollY > 10) {
+          searchContainer.classList.add('scrolled');
+        } else {
+          searchContainer.classList.remove('scrolled');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleDelete = async (postId) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this post?');
     if (!confirmDelete) return;
