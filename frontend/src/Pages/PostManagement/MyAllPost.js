@@ -480,7 +480,7 @@ function MyAllPost() {
             <IoSearch className="search-icon" />
             <input
               type="text"
-              placeholder="Search for recipes, people, and more..."
+              placeholder="Search for Recipe Title, Category and more..."
               value={searchQuery}
               onChange={handleSearch}
             />
