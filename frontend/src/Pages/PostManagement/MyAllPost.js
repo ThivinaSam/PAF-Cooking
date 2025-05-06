@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { IoSend, IoAdd } from "react-icons/io5";
+import { IoSend, IoAdd, IoSearch } from "react-icons/io5";
 import { FaEdit, FaCommentAlt } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { BiSolidLike } from "react-icons/bi";
@@ -413,6 +413,7 @@ function MyAllPost() {
           transition={{ delay: 0.2 }}
         >
           <div className="search-bar">
+            <IoSearch className="search-icon" />
             <input
               type="text"
               placeholder="Search for recipes, people, and more..."
