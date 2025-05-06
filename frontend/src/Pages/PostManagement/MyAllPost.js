@@ -510,14 +510,18 @@ function MyAllPost() {
                           <motion.button 
                             className='icon-button edit'
                             onClick={() => handleUpdate(post.id)}
-                            whileHover={{ scale: 1.1, backgroundColor: 'rgba(102, 126, 234, 0.1)' }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            data-tooltip="Edit Post"
                           >
                             <FaEdit />
                           </motion.button>
                           <motion.button 
                             className='icon-button delete'
                             onClick={() => handleDelete(post.id)}
-                            whileHover={{ scale: 1.1, backgroundColor: 'rgba(239, 68, 68, 0.1)' }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            data-tooltip="Delete Post"
                           >
                             <RiDeleteBin6Fill />
                           </motion.button>

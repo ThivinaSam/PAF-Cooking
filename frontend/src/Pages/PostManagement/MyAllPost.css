@@ -282,6 +282,98 @@ body {
   background: rgba(239, 68, 68, 0.1);
 }
 
+/* Post Actions Container */
+.owner-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Icon Buttons Base Styles */
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Edit Button Styles */
+.icon-button.edit {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+.icon-button.edit:hover {
+  background: #6366f1;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.icon-button.edit:active {
+  transform: translateY(0);
+}
+
+/* Delete Button Styles */
+.icon-button.delete {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.icon-button.delete:hover {
+  background: #ef4444;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.icon-button.delete:active {
+  transform: translateY(0);
+}
+
+/* Icon Sizes */
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.icon-button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Tooltip Styles */
+.icon-button::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background: #1e293b;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.icon-button:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
 .owner-actions {
   display: flex;
   gap: 8px;
@@ -866,6 +958,39 @@ body {
   background: #e2e8f0;
 }
 
+/* Delete Confirmation Modal */
+.delete-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-width: 400px;
+  width: 90%;
+}
+
+.delete-modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+/* Success Animation */
+@keyframes successPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.success-animation {
+  animation: successPop 0.3s ease;
+}
+
 /* Success/Error Notifications */
 .notification {
   position: fixed;
@@ -973,6 +1098,16 @@ body {
   .action-button {
     width: 32px;
     height: 32px;
+  }
+
+  .icon-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-button svg {
+    width: 16px;
+    height: 16px;
   }
 
   .delete-confirmation {
