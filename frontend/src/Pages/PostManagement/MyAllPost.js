@@ -15,6 +15,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import './MyAllPost.css';
 Modal.setAppElement('#root');
 
+const formatTimeAgo = (dateString) => {
+  const now = new Date();
+  const postDate = new Date(dateString);
+  const secondsAgo = Math.floor((now - postDate) / 1000);
+
+  if (secondsAgo < 60) {
+    return 'Just now';
+  } else if (secondsAgo < 3600) {
+    const minutes = Math.floor(secondsAgo / 60);
+    return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+  } else if (secondsAgo < 86400) {
+    const hours = Math.floor(secondsAgo / 3600);
+    return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+  } else if (secondsAgo < 604800) {
+    const days = Math.floor(secondsAgo / 86400);
+    return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+  } else {
+    return postDate.toLocaleDateString();
+  }
+};
+
 function MyAllPost() {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -29,27 +50,6 @@ function MyAllPost() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const navigate = useNavigate();
   const loggedInUserID = localStorage.getItem('userID');
-
-  const formatTimeAgo = (dateString) => {
-    const now = new Date();
-    const postDate = new Date(dateString);
-    const secondsAgo = Math.floor((now - postDate) / 1000);
-  
-    if (secondsAgo < 60) {
-      return 'Just now';
-    } else if (secondsAgo < 3600) {
-      const minutes = Math.floor(secondsAgo / 60);
-      return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
-    } else if (secondsAgo < 86400) {
-      const hours = Math.floor(secondsAgo / 3600);
-      return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
-    } else if (secondsAgo < 604800) {
-      const days = Math.floor(secondsAgo / 86400);
-      return `${days} ${days === 1 ? 'day' : 'days'} ago`;
-    } else {
-      return postDate.toLocaleDateString();
-    }
-  };
 
   useEffect(() => {
     const fetchPosts = async () => {
