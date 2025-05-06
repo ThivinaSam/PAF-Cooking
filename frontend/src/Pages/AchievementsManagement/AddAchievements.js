@@ -185,7 +185,7 @@ function AddAchievements() {
         animate={{ opacity: 1, y: 0 }}
       >
         <div className="form-header">
-          <h1>Add New Achievement</h1>
+          <h1>Add New Learning Progress</h1>
           <p>Share your milestone with the community</p>
           <div className="progress-steps">
             {[1, 2, 3].map((step) => (
@@ -270,7 +270,7 @@ function AddAchievements() {
                   required
                   placeholder=" "
                 />
-                <label>Achievement Title</label>
+                <label>Learning progress Title</label>
               </div>
 
               <div className="floating-input category-dropdown" ref={dropdownRef}>
@@ -334,7 +334,7 @@ function AddAchievements() {
                   onChange={handleChange}
                   required
                 />
-                <label>Achievement Date</label>
+                <label>Learning Progress Date</label>
               </div>
             </div>
           </div>
@@ -350,7 +350,7 @@ function AddAchievements() {
               {isSubmitting ? (
                 <div className="loading">Submitting...</div>
               ) : (
-                <>Add Achievement</>
+                <>Add Learning Progress</>
               )}
             </motion.button>
           </div>

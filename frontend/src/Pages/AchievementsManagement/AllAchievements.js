@@ -68,7 +68,7 @@ function AllAchievements() {
         <div className="achievements-header">
           <div className="header-top">
             <div className="header-title">
-              <h1>Achievement Collection</h1>
+              <h1>Learning Progress</h1>
               <p className="subtitle">Track your journey of success</p>
             </div>
           </div>
@@ -78,7 +78,7 @@ function AllAchievements() {
               <FaTrophy className="stat-icon trophy" />
               <div className="stat-details">
                 <span className="stat-value">{filteredData.length}</span>
-                <span className="stat-label">Total Achievements</span>
+                <span className="stat-label">Total Learning Progress</span>
               </div>
             </div>
             <div className="stat-item">
@@ -106,7 +106,7 @@ function AllAchievements() {
               <IoSearch className="search-icon" />
               <input
                 type="text"
-                placeholder="Search achievements..."
+                placeholder="Search Learning Progress..."
                 value={searchQuery}
                 onChange={handleSearch}
                 className="search-input"
@@ -142,7 +142,7 @@ function AllAchievements() {
         >
           <div className="button-inner">
             <IoIosCreate className="add-icon" />
-            <span className="button-text">Add Achievement</span>
+            <span className="button-text">Add Learning Progress</span>
           </div>
           <div className="button-glow" />
         </motion.button>
@@ -158,7 +158,7 @@ function AllAchievements() {
                   className="empty-content"
                 >
                   <FaTrophy className="empty-icon" />
-                  <h3>Start Your Achievement Journey</h3>
+                  <h3>Start Your Learning Progress Journey</h3>
                   <p>Create your first milestone and track your progress</p>
                   <motion.button
                     className="first-achievement-btn"
@@ -170,7 +170,7 @@ function AllAchievements() {
                     onClick={() => window.location.href = '/addAchievements'}
                   >
                     <IoIosCreate className="btn-icon" />
-                    <span>Add First Achievement</span>
+                    <span>Add First Learning Progress</span>
                     <div className="btn-shine"></div>
                   </motion.button>
                 </motion.div>
@@ -251,7 +251,7 @@ function AllAchievements() {
                               onClick={() => window.location.href = `/updateAchievements/${progress.id}`}
                             >
                               <MdEdit className="btn-icon" />
-                              <span className="btn-text">Edit</span>
+                              <span className="btn-text">Update</span>
                             </motion.button>
                             <motion.button
                               className="action-btn delete-btn"

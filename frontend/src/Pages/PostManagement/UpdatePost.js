@@ -14,6 +14,7 @@ function UpdatePost() {
   const [existingMedia, setExistingMedia] = useState([]); // Initialize as an empty array
   const [newMedia, setNewMedia] = useState([]); // New media files to upload
   const [loading, setLoading] = useState(true); // Add loading state
+  const [customCategory, setCustomCategory] = useState('');
 
   useEffect(() => {
     // Fetch the post details
@@ -122,7 +123,8 @@ function UpdatePost() {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('category', category); // Include category in the update
+    // Use custom category if "Others" is selected
+    formData.append('category', category === 'Others' ? customCategory : category);
     newMedia.forEach((file) => formData.append('newMediaFiles', file));
 
     try {
@@ -186,15 +188,32 @@ function UpdatePost() {
               <div className="form-group">
                 <select
                   value={category}
-                  onChange={(e) => setCategory(e.target.value)}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                    if (e.target.value !== 'Others') {
+                      setCustomCategory('');
+                    }
+                  }}
                   required
                 >
                   <option value="" disabled>Select Category</option>
-                  <option value="Tech">Tech</option>
-                  <option value="Programming">Programming</option>
-                  <option value="Cooking">Cooking</option>
-                  <option value="Photography">Photography</option>
+                  <option value="Drinks">Drinks and MilkShakes</option>
+                  <option value="Bakery">Bakery Items</option>
+                  <option value="Cooking">Cooking Items</option>
+                  <option value="Others">Others</option>
                 </select>
+
+                {category === 'Others' && (
+                  <div className="form-group custom-category">
+                    <input
+                      type="text"
+                      value={customCategory}
+                      onChange={(e) => setCustomCategory(e.target.value)}
+                      placeholder="Enter custom category"
+                      required
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="media-section">

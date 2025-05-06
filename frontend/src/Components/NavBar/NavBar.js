@@ -90,7 +90,7 @@ function NavBar() {
                             className={`nav_nav_item ${currentPath === '/allAchievements' ? 'nav_nav_item_active' : ''}`}
                             onClick={() => (window.location.href = '/allAchievements')}
                         >
-                            Achievements
+                            Learning Progress
                         </p>
                         {allRead ? (
                             <MdNotifications
