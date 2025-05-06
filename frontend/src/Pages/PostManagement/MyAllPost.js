@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { IoSend, IoAdd, IoSearch } from "react-icons/io5";
+import { IoSend, IoAdd, IoSearch, IoPlay } from "react-icons/io5";
 import { FaEdit, FaCommentAlt } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { BiSolidLike } from "react-icons/bi";
@@ -375,7 +375,7 @@ function MyAllPost() {
     if (!post.media || post.media.length === 0) {
       return null;
     }
-
+  
     return (
       <div className={`media-collage media-count-${Math.min(post.media.length, 4)}`}>
         {post.media.slice(0, 4).map((mediaUrl, index) => (
@@ -387,10 +387,17 @@ function MyAllPost() {
             transition={{ duration: 0.2 }}
           >
             {mediaUrl.endsWith('.mp4') ? (
-              <video>
-                <source src={`http://localhost:8080${mediaUrl}`} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="video-thumbnail">
+                <video 
+                  preload="metadata"
+                  className="hidden-video"
+                >
+                  <source src={`http://localhost:8080${mediaUrl}`} type="video/mp4" />
+                </video>
+                <div className="video-overlay">
+                  <IoPlay className="play-icon" />
+                </div>
+              </div>
             ) : (
               <img src={`http://localhost:8080${mediaUrl}`} alt="Post Media" />
             )}
