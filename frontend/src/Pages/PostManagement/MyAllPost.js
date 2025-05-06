@@ -338,16 +338,21 @@ function MyAllPost() {
   };
 
   const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
+    const query = e.target.value.toLowerCase().trim();
     setSearchQuery(query);
-
-    // Filter posts based on title, description, or category
-    const filtered = posts.filter(
-      (post) =>
-        post.title.toLowerCase().includes(query) ||
-        post.description.toLowerCase().includes(query) ||
-        (post.category && post.category.toLowerCase().includes(query))
-    );
+  
+    if (query === '') {
+      setFilteredPosts(posts); // Reset to all posts when search is empty
+      return;
+    }
+  
+    const filtered = posts.filter((post) => {
+      const titleMatch = post.title.toLowerCase().includes(query);
+      const categoryMatch = post.category ? post.category.toLowerCase().includes(query) : false;
+      
+      return titleMatch || categoryMatch;
+    });
+  
     setFilteredPosts(filtered);
   };
 
