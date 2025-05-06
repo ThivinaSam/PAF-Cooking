@@ -15,6 +15,44 @@ import { motion, AnimatePresence } from "framer-motion";
 import './MyAllPost.css';
 Modal.setAppElement('#root');
 
+const formatTimeAgo = (dateString) => {
+  // Handle invalid or empty date strings
+  if (!dateString) return 'Just now';
+  
+  let postDate;
+  try {
+    // Try parsing the date
+    postDate = new Date(dateString);
+    
+    // Check if date is valid
+    if (isNaN(postDate.getTime())) {
+      return 'Recently';
+    }
+  } catch (error) {
+    console.error("Error parsing date:", error);
+    return 'Recently';
+  }
+
+  const now = new Date();
+  const secondsAgo = Math.floor((now - postDate) / 1000);
+
+  if (secondsAgo < 60) {
+    return 'Just now';
+  } else if (secondsAgo < 3600) {
+    const minutes = Math.floor(secondsAgo / 60);
+    return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+  } else if (secondsAgo < 86400) {
+    const hours = Math.floor(secondsAgo / 3600);
+    return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+  } else if (secondsAgo < 604800) {
+    const days = Math.floor(secondsAgo / 86400);
+    return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+  } else {
+    // Format date as day/month/year
+    return `${postDate.getDate()}/${postDate.getMonth() + 1}/${postDate.getFullYear()}`;
+  }
+};
+
 function MyAllPost() {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -26,6 +64,7 @@ function MyAllPost() {
   const [editingComment, setEditingComment] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
+  const [currentTime, setCurrentTime] = useState(new Date());
   const navigate = useNavigate();
   const loggedInUserID = localStorage.getItem('userID');
 
@@ -38,11 +77,19 @@ function MyAllPost() {
         // Filter posts to include only those with the logged-in user's ID
         const userPosts = response.data.filter((post) => post.userID === userID);
 
-        setPosts(userPosts);
-        setFilteredPosts(userPosts);
+        // Make sure all posts have a valid createdAt date
+        const processedPosts = userPosts.map(post => {
+          if (!post.createdAt || isNaN(new Date(post.createdAt).getTime())) {
+            return { ...post, createdAt: new Date().toISOString() };
+          }
+          return post;
+        });
+
+        setPosts(processedPosts);
+        setFilteredPosts(processedPosts);
 
         // Fetch post owners' names
-        const userIDs = [...new Set(userPosts.map((post) => post.userID))];
+        const userIDs = [...new Set(processedPosts.map((post) => post.userID))];
         const ownerPromises = userIDs.map((userID) =>
           axios.get(`http://localhost:8080/user/${userID}`)
             .then((res) => ({
@@ -100,6 +147,14 @@ function MyAllPost() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // Update every minute
+
+    return () => clearInterval(timer);
+  }, []);
+
   const handleDelete = async (postId) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this post?');
     if (!confirmDelete) return;
@@ -146,10 +201,12 @@ function MyAllPost() {
         setFilteredPosts(sortedByLikes);
         break;
       case 'Recent':
-        // Assuming posts have a createdAt field
-        const sortedByDate = [...posts].sort((a, b) => 
-          new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
-        );
+        // Ensure valid dates for sorting
+        const sortedByDate = [...posts].sort((a, b) => {
+          const dateA = new Date(a.createdAt || 0);
+          const dateB = new Date(b.createdAt || 0);
+          return isNaN(dateB.getTime()) || isNaN(dateA.getTime()) ? 0 : dateB - dateA;
+        });
         setFilteredPosts(sortedByDate);
         break;
       case 'Following':
@@ -364,11 +421,6 @@ function MyAllPost() {
   const closeModal = () => {
     setSelectedMedia(null);
     setIsModalOpen(false);
-  };
-
-  const formatTimeAgo = (dateString) => {
-    // Placeholder for time formatting - you would implement actual logic
-    return "2 hours ago";
   };
 
   const renderPostMedia = (post) => {
@@ -598,7 +650,7 @@ function MyAllPost() {
                           {post.comments?.map((comment) => (
                             <motion.div 
                               key={comment.id} 
-                              className='comment-card'
+                              className="comment-card"
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, height: 0 }}
@@ -611,7 +663,9 @@ function MyAllPost() {
                                 <div className="comment-main">
                                   <div className="comment-header">
                                     <h5>{comment.userFullName}</h5>
-                                    <span className="comment-time">Just now</span>
+                                    <span className="comment-time">
+                                      {comment.createdAt ? formatTimeAgo(comment.createdAt) : 'Just now'}
+                                    </span>
                                   </div>
                                   
                                   {editingComment.id === comment.id ? (
