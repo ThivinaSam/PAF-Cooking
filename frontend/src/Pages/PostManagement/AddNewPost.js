@@ -16,18 +16,32 @@ function AddNewPost() {
   const [customCategory, setCustomCategory] = useState(''); // Add new state for custom category
   const userID = localStorage.getItem('userID');
 
+  // Update the validateTitle function
   const validateTitle = (value) => {
-    // Check for alphanumeric characters only
-    const alphanumericRegex = /^[a-zA-Z0-9\s]*$/;
+    // Regex that allows English, Sinhala and spaces
+    // Unicode ranges: 
+    // - \u0D80-\u0DFF : Sinhala
+    // - \u0020 : Space
+    // - a-zA-Z : English letters
+    const validCharactersRegex = /^[\u0D80-\u0DFF\u0020a-zA-Z\s]*$/;
+    
+    // Remove extra spaces and split into words
     const words = value.trim().split(/\s+/).filter(word => word.length > 0);
     const currentWordCount = words.length;
     setTitleWordCount(currentWordCount);
-    
+
+    // Validate word count and characters
     if (currentWordCount > 25) {
       setTitleError('Title must not exceed 25 words');
       return false;
-    } else if (!alphanumericRegex.test(value)) {
-      setTitleError('Title can only contain letters and numbers');
+    } else if (!validCharactersRegex.test(value)) {
+      setTitleError('Title can only contain Sinhala and English letters');
+      return false;
+    } else if (value.length > 100) {
+      setTitleError('Title must not exceed 100 characters');
+      return false;
+    } else if (value.trim().length === 0) {
+      setTitleError('Title cannot be empty');
       return false;
     } else {
       setTitleError('');
@@ -148,7 +162,7 @@ function AddNewPost() {
                 <input
                   className="Auth_input"
                   type="text"
-                  placeholder="Title (max 25 words)"
+                  placeholder="Enter title in Sinhala or English (max 25 words)"
                   value={title}
                   onChange={(e) => {
                     const newValue = e.target.value;
