@@ -715,17 +715,17 @@ textarea.form_input {
 }
 
 .login-button {
-  width: 50%;
+  width: 100%;
   padding: 15px;
   margin-top: 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   border-radius: 10px;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.5s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .login-button:hover {
