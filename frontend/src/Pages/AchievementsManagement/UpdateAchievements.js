@@ -249,7 +249,7 @@ function UpdateAchievements() {
                     required
                     placeholder=" "
                   />
-                  <label>Achievement Title</label>
+                  <label>Learning Progress Title</label>
                   {errors.title && (
                     <motion.span 
                       className="error-message"
