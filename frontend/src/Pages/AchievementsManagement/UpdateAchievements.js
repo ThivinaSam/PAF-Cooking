@@ -338,7 +338,7 @@ function UpdateAchievements() {
                     onChange={handleInputChange}
                     required
                   />
-                  <label>Achievement Date</label>
+                  <label>Learning Progress Date</label>
                   {errors.date && (
                     <motion.span 
                       className="error-message"
