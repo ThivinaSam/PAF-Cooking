@@ -106,7 +106,7 @@ function AllAchievements() {
               <IoSearch className="search-icon" />
               <input
                 type="text"
-                placeholder="Search achievements..."
+                placeholder="Search Learning Progress..."
                 value={searchQuery}
                 onChange={handleSearch}
                 className="search-input"

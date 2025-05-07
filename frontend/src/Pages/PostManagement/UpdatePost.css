@@ -69,7 +69,7 @@
 .form-group textarea:not(:placeholder-shown) ~ label {
   transform: translateY(-1.4rem) scale(0.85);
   background: white;
-  color: #667eea;
+  color: #02642c;
 }
 
 .media-section {
@@ -141,16 +141,42 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 2px solid #0a0b0d;
+
 }
 
 .cancel-button {
-  flex: 1;
+  flex: 2;
   padding: 1rem;
-  border: 2px solid #e2e8f0;
+  border: none;
   border-radius: 12px;
-  background: white;
-  color: #718096;
+  background: linear-gradient(135deg, #c1caf0 0%, #8e66b6 100%);
+  color: white;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 2px solid #0a0b0d;
+}
+
+.custom-category {
+  margin-top: 1rem;
+}
+
+.custom-category input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.custom-category input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.custom-category input::placeholder {
+  color: #94a3b8;
 }

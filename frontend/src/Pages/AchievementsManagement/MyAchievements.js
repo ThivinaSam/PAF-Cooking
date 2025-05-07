@@ -66,7 +66,7 @@ function MyAchievements() {
       <div className="dashboard-content">
         <div className="dashboard-header">
           <div className="header-title">
-            <h1>My Achievements</h1>
+            <h1>My Learning Progress</h1>
             <p>Track your progress and celebrate milestones</p>
           </div>
 
@@ -75,7 +75,7 @@ function MyAchievements() {
               <FaTrophy className="stat-icon trophy" />
               <div className="stat-info">
                 <span className="stat-value">{stats.total}</span>
-                <span className="stat-label">Total Achievements</span>
+                <span className="stat-label">Total Learning Progress</span>
               </div>
             </div>
             <div className="stat-card">
@@ -110,7 +110,7 @@ function MyAchievements() {
               onClick={() => window.location.href = '/addAchievements'}
             >
               <IoAdd />
-              <span>New Achievement</span>
+              <span>New Learning Progress</span>
             </motion.button>
           </div>
         </div>
@@ -127,14 +127,14 @@ function MyAchievements() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <FaTrophy className="empty-icon" />
-                <h3>No Achievements Yet</h3>
+                <h3>No Learning Progress Yet</h3>
                 <p>Start documenting your journey</p>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => window.location.href = '/addAchievements'}
                 >
-                  Add First Achievement
+                  Add First Learning Progress
                 </motion.button>
               </motion.div>
             ) : (
