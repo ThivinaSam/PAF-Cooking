@@ -53,7 +53,7 @@ function AllAchievements() {
           alert('Learning Progress deleted successfully!');
           setFilteredData(filteredData.filter((progress) => progress.id !== id));
         } else {
-          alert('Failed to delete Achievements.');
+          alert('Failed to delete Learning Progress.');
         }
       } catch (error) {
         console.error('Error deleting Achievements:', error);
