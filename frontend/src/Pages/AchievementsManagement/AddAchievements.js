@@ -166,7 +166,7 @@ function AddAchievements() {
         throw new Error(`Failed to create achievement: ${errorText}`);
       }
       
-      alert('Achievement added successfully!');
+      alert('Learning Progress added successfully!');
       window.location.href = '/myAchievements';
     } catch (error) {
       console.error('Submit error:', error);
