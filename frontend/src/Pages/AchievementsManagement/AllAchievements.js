@@ -50,7 +50,7 @@ function AllAchievements() {
           method: 'DELETE',
         });
         if (response.ok) {
-          alert('Achievements deleted successfully!');
+          alert('Learning Progress deleted successfully!');
           setFilteredData(filteredData.filter((progress) => progress.id !== id));
         } else {
           alert('Failed to delete Achievements.');
