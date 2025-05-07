@@ -170,7 +170,7 @@ function AddAchievements() {
       window.location.href = '/myAchievements';
     } catch (error) {
       console.error('Submit error:', error);
-      alert(`Failed to add Achievement: ${error.message}`);
+      alert(`Failed to add Learning Progress: ${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
