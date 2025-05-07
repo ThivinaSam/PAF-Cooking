@@ -182,7 +182,7 @@ function UpdateAchievements() {
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="form-header">
-            <h1>Update Achievement</h1>
+            <h1>Update Learning Progress</h1>
             <p>Refine and improve your milestone</p>
           </div>
 
