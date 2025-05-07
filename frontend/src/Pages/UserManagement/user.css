@@ -695,14 +695,14 @@ textarea.form_input {
 }
 
 .add_skill_btn {
-  border-top-right-radius: 18px;
+  border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   padding: 0 1.5rem;
-  background: #667e00;
-  color: red;
+  background: #667eea;
+  color: white;
   border: none;
   cursor: pointer;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .add_skill_btn:hover {
