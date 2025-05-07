@@ -44,7 +44,7 @@ function AllAchievements() {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this Achievements?')) {
+    if (window.confirm('Are you sure you want to delete this Learning Progress?')) {
       try {
         const response = await fetch(`http://localhost:8080/achievements/${id}`, {
           method: 'DELETE',
