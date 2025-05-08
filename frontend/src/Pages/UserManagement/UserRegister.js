@@ -76,7 +76,7 @@ function UserRegister() {
             isValid = false;
         }
         if (formData.skills.length < 2) {
-            alert("Please add at least two skills.");
+            alert("Add atleast two skills");
             isValid = false;
         }
         if (!isValid) {
