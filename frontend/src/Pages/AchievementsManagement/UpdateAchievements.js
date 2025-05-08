@@ -182,7 +182,7 @@ function UpdateAchievements() {
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="form-header">
-            <h1>Update Achievement</h1>
+            <h1>Update Learning Progress</h1>
             <p>Refine and improve your milestone</p>
           </div>
 
@@ -249,7 +249,7 @@ function UpdateAchievements() {
                     required
                     placeholder=" "
                   />
-                  <label>Achievement Title</label>
+                  <label>Learning Progress Title</label>
                   {errors.title && (
                     <motion.span 
                       className="error-message"
@@ -338,7 +338,7 @@ function UpdateAchievements() {
                     onChange={handleInputChange}
                     required
                   />
-                  <label>Achievement Date</label>
+                  <label>Learning Progress Date</label>
                   {errors.date && (
                     <motion.span 
                       className="error-message"
