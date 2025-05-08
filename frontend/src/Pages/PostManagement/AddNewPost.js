@@ -54,8 +54,8 @@ function AddNewPost() {
     const currentWordCount = words.length;
     setWordCount(currentWordCount);
 
-    if (currentWordCount < 10) {
-      setDescriptionError('Description must have at least 10 words');
+    if (currentWordCount < 20) {
+      setDescriptionError('Description must have at least 20 words');
       return false;
     } else if (currentWordCount > 50) {
       setDescriptionError('Description must not exceed 50 words');
@@ -140,11 +140,11 @@ function AddNewPost() {
       const response = await axios.post('http://localhost:8080/posts', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      alert('Post created successfully!');
+      alert('Post added successfully!');
       window.location.href = '/myAllPost';
     } catch (error) {
       console.error(error);
-      alert('Failed to create post.');
+      alert('Failed to add post.');
       window.location.reload();
     }
   };
