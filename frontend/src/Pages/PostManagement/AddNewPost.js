@@ -54,8 +54,8 @@ function AddNewPost() {
     const currentWordCount = words.length;
     setWordCount(currentWordCount);
 
-    if (currentWordCount < 20) {
-      setDescriptionError('Description must have at least 20 words');
+    if (currentWordCount < 5) {
+      setDescriptionError('Description must have at least 5 words');
       return false;
     } else if (currentWordCount > 50) {
       setDescriptionError('Description must not exceed 50 words');
