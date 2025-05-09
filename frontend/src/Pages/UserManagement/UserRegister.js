@@ -138,7 +138,7 @@ function UserRegister() {
                 <div className="register_inner_container">
                     <div className="register_content">
                         <div className="register_header">
-                            <h1 className="register_title">Create Account</h1>
+                            <h1 className="register_title">Create an Account</h1>
                             <p className="register_subtitle">Join our community today!</p>
                         </div>
 
