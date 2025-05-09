@@ -76,7 +76,7 @@ function UserRegister() {
             isValid = false;
         }
         if (formData.skills.length < 2) {
-            alert("Please add at least two skills.");
+            alert("Add atleast two skills");
             isValid = false;
         }
         if (!isValid) {
@@ -138,7 +138,7 @@ function UserRegister() {
                 <div className="register_inner_container">
                     <div className="register_content">
                         <div className="register_header">
-                            <h1 className="register_title">Create Account</h1>
+                            <h1 className="register_title">Create an Account</h1>
                             <p className="register_subtitle">Join our community today!</p>
                         </div>
 
